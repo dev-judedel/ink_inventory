@@ -1,7 +1,6 @@
 <?php
-namespace App\Services;
+namespace App\Models;
 
-use App\Models\{InkItem, InkBatch, InkMovement};
 use Core\DB; use Exception; use DateTimeImmutable;
 
 class InkInventoryService
@@ -155,7 +154,7 @@ class InkInventoryService
 
     public function reorderCandidates(): array
     {
-        $rows = DB::query("""
+        $sql = "
             SELECT i.*, (
                 SELECT COALESCE(SUM(CASE WHEN type='IN' THEN qty WHEN type='OUT' THEN -qty ELSE qty END),0)
                 FROM ink_movements m WHERE m.item_id=i.id
@@ -164,7 +163,8 @@ class InkInventoryService
             WHERE i.is_active=1
             HAVING on_hand <= i.reorder_point
             ORDER BY name ASC
-        """)->all();
+        ";
+        $rows = DB::query($sql)->all();
         return $rows;
     }
 }
