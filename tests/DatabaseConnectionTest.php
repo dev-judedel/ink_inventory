@@ -4,7 +4,7 @@ declare(strict_types=1);
 // Simple standalone test to verify database connectivity using PDO.
 // Loads credentials from the project's .env file.
 
-$envPath = dirname(__DIR__) . '/.env';
+$envPath = dirname(__DIR__) . '/app/config/.env';
 if (!file_exists($envPath)) {
     fwrite(STDERR, ".env file not found at {$envPath}\n");
     exit(1);
