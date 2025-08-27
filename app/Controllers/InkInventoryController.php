@@ -12,7 +12,14 @@ class InkInventoryController extends Controller
 
     public function index()
     {
-        $items = InkItem::where('is_active',1)->orderBy('name','asc')->paginate(25);
+        $builder = InkItem::where('is_active',1);
+        if ($q = Request::input('q')) {
+            $builder = $builder->whereRaw(
+                "(sku LIKE ? OR name LIKE ? OR brand LIKE ? OR color LIKE ?)",
+                ["%$q%","%$q%","%$q%","%$q%"]
+            );
+        }
+        $items = $builder->orderBy('name','asc')->paginate(25);
         return view('ink/index', compact('items'));
     }
 
