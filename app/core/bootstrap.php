@@ -15,7 +15,17 @@ spl_autoload_register(function (string $class): void {
             continue;
         }
         $relative = substr($class, $len);
-        $file = $baseDir . str_replace('\\', '/', $relative) . '.php';
+        $relativePath = str_replace('\\', '/', $relative);
+
+        // Ensure directory segments are lowercase to match folder structure
+        $segments = explode('/', $relativePath);
+        if (count($segments) > 1) {
+            $fileName = array_pop($segments);
+            $dir = implode('/', array_map('strtolower', $segments));
+            $relativePath = ($dir !== '' ? $dir . '/' : '') . $fileName;
+        }
+
+        $file = $baseDir . $relativePath . '.php';
         if (file_exists($file)) {
             require $file;
         }
