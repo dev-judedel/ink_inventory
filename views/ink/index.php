@@ -8,7 +8,7 @@
     <table class="table">
       <thead><tr><th>SKU</th><th>Name</th><th>Brand</th><th>Color</th><th>On Hand</th><th>Reorder Pt</th><th></th></tr></thead>
       <tbody>
-        <?php foreach ($items as $it): ?>
+        <?php if(!empty($items)): foreach($items as $it): ?>
           <tr>
             <td><?=htmlspecialchars($it->sku, ENT_QUOTES)?></td>
             <td><a href="/ink/<?=$it->id?>"><?=htmlspecialchars($it->name, ENT_QUOTES)?></a></td>
@@ -18,7 +18,9 @@
             <td><?=$it->reorder_point?></td>
             <td><a class="btn btn-sm" href="/ink/<?=$it->id?>">Open</a></td>
           </tr>
-        <?php endforeach; ?>
+        <?php endforeach; else: ?>
+          <tr><td colspan="7" class="text-center">No items found.</td></tr>
+        <?php endif; ?>
       </tbody>
     </table>
   </div>
