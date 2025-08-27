@@ -2,11 +2,12 @@
 namespace App\Models;
 
 use Core\DB;
+use Core\Model;
 
 class InkItem extends Model
 {
-    protected $table = 'ink_items';
-    protected $fillable = ['sku','name','brand','color','printer_models','uom','reorder_point','is_active'];
+    protected string $table = 'ink_items';
+    protected array $fillable = ['sku','name','brand','color','printer_models','uom','reorder_point','is_active'];
 
     public function batches() {
         return InkBatch::where('item_id', $this->id)->orderBy('received_at','asc')->get();
