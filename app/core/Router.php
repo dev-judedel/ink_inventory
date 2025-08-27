@@ -34,6 +34,7 @@ class Router
 
     public function dispatch(string $method, string $uri): void
     {
+<<<<<<< HEAD
         // Raw path from the requested URI
         $path = parse_url($uri, PHP_URL_PATH) ?? '/';
 
@@ -51,20 +52,30 @@ class Router
         $path = '/' . ltrim($path, '/');
         $path = rtrim($path, '/');
 
+=======
+        $path = parse_url($uri, PHP_URL_PATH) ?? '/';
+>>>>>>> 50c8e431d7568ea4d5a49d17a510f6f8ea27bfc4
         foreach ($this->routes as [$m, $pattern, $action]) {
             if ($m !== $method) {
                 continue;
             }
             $regex = preg_replace('#\{[^/]+\}#', '([^/]+)', $pattern);
             $regex = '#^' . rtrim($regex, '/') . '$#';
+<<<<<<< HEAD
 
             if (preg_match($regex, $path, $matches)) {
+=======
+            if (preg_match($regex, rtrim($path, '/'), $matches)) {
+>>>>>>> 50c8e431d7568ea4d5a49d17a510f6f8ea27bfc4
                 array_shift($matches);
                 $this->invoke($action, $matches);
                 return;
             }
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 50c8e431d7568ea4d5a49d17a510f6f8ea27bfc4
         http_response_code(404);
         echo 'Not Found';
     }

@@ -1,5 +1,12 @@
 RewriteEngine On
+<<<<<<< HEAD
 RewriteBase /ink_inventory/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
+=======
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+>>>>>>> 50c8e431d7568ea4d5a49d17a510f6f8ea27bfc4

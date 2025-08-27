@@ -1,8 +1,8 @@
 <?php
 namespace App\Controllers;
 
-use App\Models\{InkItem, InkBatch, InkMovement};
-use App\Services\InkInventoryService;
+use Core\Controller;
+use App\Models\{InkItem, InkBatch, InkMovement, InkInventoryService};
 use Core\Request; use Core\Response; use Core\Auth;
 
 class InkInventoryController extends Controller
